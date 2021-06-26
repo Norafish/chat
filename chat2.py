@@ -14,7 +14,6 @@ def read_file(filename):
 
 # 將字串分割統計每個人說話長度
 def convert(lines):
-	new = []
 	person = None
 	allen_word_count = 0 # s[2]以後才是對話紀錄，allen講的字數就把他家在這
 	viki_work_count = 0
@@ -31,20 +30,21 @@ def convert(lines):
 				allen_image_count += 1
 			elif s[2] == '貼圖':
 				allen_sticker_count +=1
-			for m in s[2:]:
-				allen_word_count += len(m)
+			else:
+				for m in s[2:]:
+					allen_word_count += len(m)
 		elif name == 'Viki':
 			if s[2] == '圖片':
 				viki_image_count += 1
 			elif s[2] == '貼圖':
 				viki_sticker_count +=1
-			for m in s[2:]:
-				viki_work_count += len(m)
+			else:
+				for m in s[2:]:
+					viki_work_count += len(m)
 	
 	print('allen說了', allen_word_count,'個字', '傳了', allen_image_count,'圖片和', allen_sticker_count, '個貼圖')
 	print('viki說了', viki_work_count,'個字', '傳了', viki_image_count,'圖片和', viki_sticker_count, '個貼圖')
 
-	return new
 
 def write_file(filename, lines):
 	with open(filename, 'w', encoding='utf-8-sig') as f:
